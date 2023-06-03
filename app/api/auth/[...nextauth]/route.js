@@ -1,6 +1,7 @@
 import NextAuth from "next-auth/next";
 import GoogleProvider from 'next-auth/providers/google';
 // import { signIn } from "next-auth/react";
+import { connectToDB} from "@utils/database";
 
 console.log()
 
@@ -17,9 +18,16 @@ async session({session}){
 },
 async signIn({profile}){
     try {
-        //serverless -> 
+        //serverless -> Lambda
+        await connectToDB();
+        //CHECK IF A USER ALREADY EXITS 
+
+        //IF NOT, CREATE A NEW USER
+
+        return true;
     } catch (error) {
-        
+        console.log(error)
+        return false;
     }
 }
 }) 
